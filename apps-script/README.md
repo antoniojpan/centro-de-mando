@@ -87,10 +87,14 @@ Después, en la web: botón **⚙** → pega URL y clave → *Guardar*. Se guard
 *Implementar → Gestionar implementaciones → lápiz → Versión: Nueva versión*.
 Si no, la URL sigue sirviendo el código viejo.
 
-Qué hace `+1`: añade un token con coma en la celda del tipo, en la fila de hoy
-(columnas D–J). La hoja recalcula `Día`, `Saldo`, `Recuento individual` y
-`Saldo por tipo` con sus propias fórmulas — la web no calcula nada. Además
-refresca `data/dashboard.json` para que el resto de dispositivos lo vean.
+Qué hace `+1`: añade el token **`indet,`** en la celda del tipo, en la fila de
+hoy (columnas D–J) — «serie indeterminada», es decir una serie de la que no se
+registra la descripción. La hoja cuenta comas, así que cada clic suma una serie.
+La hoja recalcula `Día`, `Saldo`, `Recuento individual` y `Saldo por tipo` con
+sus propias fórmulas: la web no calcula nada. Además refresca
+`data/dashboard.json` para que el resto de dispositivos lo vean.
+
+Ejemplo: si hoy tiene `paseo,` en Aerob y pulsas `+1`, queda `paseo,indet,`.
 
 ## Mantenimiento
 

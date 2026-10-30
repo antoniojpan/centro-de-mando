@@ -246,8 +246,11 @@ function cmFilaDeHoy_(sh, tz) {
 
 /**
  * Añade `n` series de un tipo, en la fila de hoy.
- * Se añade un token con coma, que es lo que cuenta la hoja.
+ * La hoja cuenta comas, así que se añade un token «indet,» por serie
+ * (serie de la que no se ha registrado la descripción).
  */
+const CM_TOKEN_SERIE = 'indet';
+
 function cmAnadirSeries_(idx, n) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sh = ss.getSheetByName(CM_HOJA);
@@ -257,11 +260,15 @@ function cmAnadirSeries_(idx, n) {
 
   const fila = cmFilaDeHoy_(sh, tz);
   const celda = sh.getRange(fila, col);
-  const previo = String(celda.getValue() || '').trim();
-  const nuevo = (previo ? previo.replace(/,+$/, '') + ',' : '') +
-                '1,'.repeat(Math.max(1, Math.min(n || 1, 20)));
-  celda.setValue(nuevo);
+  const previo = String(celda.getValue() || '');
 
+  // Quita espacios y comas sobrantes del final antes de encadenar.
+  const limpio = previo.replace(/[\s,]+$/, '');
+  const cuantas = Math.max(1, Math.min(Math.round(n) || 1, 20));
+  const nuevo =
+    (limpio ? limpio + ',' : '') + (CM_TOKEN_SERIE + ',').repeat(cuantas);
+
+  celda.setValue(nuevo);
   SpreadsheetApp.flush(); // fuerza el recálculo de las fórmulas
   return { fila, columna: col, valor: nuevo };
 }
