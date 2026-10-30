@@ -200,6 +200,28 @@ function cmQuitarDisparador() {
   console.log(`Disparadores eliminados: ${n}`);
 }
 
+/** Diagnóstico: qué hoja, qué fila de hoy y qué hay en las celdas D..J. */
+function cmDiagnostico() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sh = ss.getSheetByName(CM_HOJA);
+  if (!sh) {
+    console.log('ERROR: no encuentro la pestaña ' + CM_HOJA);
+    console.log('Pestañas disponibles: ' + ss.getSheets().map((s) => s.getName()).join(', '));
+    return;
+  }
+  const tz = ss.getSpreadsheetTimeZone();
+  console.log('libro: ' + ss.getName());
+  console.log('tz hoja: ' + tz + ' | tz script: ' + Session.getScriptTimeZone());
+  console.log('ahora (hoja): ' + Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd HH:mm:ss'));
+  const fila = cmFilaDeHoy_(sh, tz);
+  console.log('fila de hoy detectada: ' + fila);
+  const vals = sh.getRange(3, 1, 5, 10).getValues();
+  vals.forEach((f, i) => {
+    console.log(`fila ${3 + i}: A=${cmIsoFecha_(f[0], tz)} · D..J = ${JSON.stringify(f.slice(3, 10))}`);
+  });
+  console.log('celda D' + fila + ' = ' + JSON.stringify(sh.getRange(fila, 4).getValue()));
+}
+
 // ------------------------------------------------- API web (lectura/escritura)
 
 /* Columnas de la pestaña registro donde se anotan las series, en el mismo

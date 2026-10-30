@@ -115,7 +115,11 @@ async function anadirSerie(idx, n = 1) {
     const res = await r.json();
     if (res.error) throw new Error(res.error);
     if (res.dashboard) pintarTodo(res.dashboard);
-    aviso(`+${n} serie · ya está apuntado en la hoja`);
+    const e = res.escrito || {};
+    const donde = e.fila
+      ? `fila ${e.fila}, columna ${String.fromCharCode(64 + (e.columna || 4))} → «${e.valor}»`
+      : 'hoja actualizada';
+    aviso(`+${n} serie · ${donde}`);
   } catch (e) {
     aviso(`No se pudo apuntar: ${e.message}`, true);
   } finally {
