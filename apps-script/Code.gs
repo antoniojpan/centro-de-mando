@@ -45,8 +45,8 @@ function cmNumero_(v) {
   return isNaN(n) ? null : n;
 }
 
-function cmIsoFecha_(v) {
-  if (v instanceof Date) return Utilities.formatDate(v, Session.getScriptTimeZone(), 'yyyy-MM-dd');
+function cmIsoFecha_(v, tz) {
+  if (v instanceof Date) return Utilities.formatDate(v, tz, 'yyyy-MM-dd');
   const m = String(v || '').trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   if (!m) return null;
   return `${m[3]}-${m[2].padStart(2, '0')}-${m[1].padStart(2, '0')}`;
@@ -55,8 +55,14 @@ function cmIsoFecha_(v) {
 // ------------------------------------------------------------------ construcción
 
 function cmConstruirPayload_() {
-  const sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(CM_HOJA);
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sh = ss.getSheetByName(CM_HOJA);
   if (!sh) throw new Error(`No existe la pestaña «${CM_HOJA}»`);
+
+  // Las celdas de fecha son «solo fecha» a medianoche de la zona de la HOJA.
+  // Hay que formatearlas con esa zona, no con la del script (que suele ser UTC):
+  // si no, la fecha sale un día antes.
+  const tz = ss.getSpreadsheetTimeZone();
 
   const nombres = sh
     .getRange(CM_FILA_NOMBRES, CM_COL.recuento[0], 1, CM_COL.recuento.length)
@@ -69,7 +75,7 @@ function cmConstruirPayload_() {
 
   const datos = [];
   for (const f of filas) {
-    const fecha = cmIsoFecha_(f[CM_COL.fecha - 1]);
+    const fecha = cmIsoFecha_(f[CM_COL.fecha - 1], tz);
     if (!fecha) continue;
     datos.push({
       fecha,
