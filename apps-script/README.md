@@ -96,6 +96,10 @@ sus propias fórmulas: la web no calcula nada. Además refresca
 
 Ejemplo: si hoy tiene `paseo,` en Aerob y pulsas `+1`, queda `paseo,indet,`.
 
+`−1` hace lo contrario: quita el **último** token de la celda (normalmente el
+`indet` que puso la web) y lo dice en el aviso. Si la celda queda vacía, la
+deja vacía y avisa de que no había series.
+
 ## Mantenimiento
 
 - **Rotar el token**: crear otro en GitHub y actualizar la propiedad

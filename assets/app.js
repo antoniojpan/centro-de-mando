@@ -81,12 +81,16 @@ function pintarTipos(d) {
   cont.innerHTML = d.tipos
     .map((t, i) => {
       const s = t.saldo ?? 0;
+      const dis = editable ? '' : 'disabled';
+      const tit = editable ? '' : ' title="Configura la API para poder escribir"';
       return `<div class="tipo ${clase(s)}">
         <div class="nombre">${t.nombre}</div>
         <div class="saldo">${signo(s)}${fmt(s)}</div>
         <div class="hoy">hoy ${fmt(t.hoy, 2)} ud</div>
-        <button class="add" data-idx="${i}" ${editable ? '' : 'disabled'}
-                title="${editable ? 'Añadir 1 serie' : 'Configura la API para poder escribir'}">+1</button>
+        <div class="acciones">
+          <button class="sub" data-idx="${i}" ${dis}${tit} title="Quitar 1 serie">−1</button>
+          <button class="add" data-idx="${i}" ${dis}${tit} title="Añadir 1 serie">+1</button>
+        </div>
       </div>`;
     })
     .join('');
@@ -94,13 +98,13 @@ function pintarTipos(d) {
 
 /* ---------- escritura ---------- */
 
-async function anadirSerie(idx, n = 1) {
+async function ajustar(idx, accion, n = 1) {
   const { url, clave } = api();
   if (!url) {
     aviso('Configura la API con el botón ⚙ para poder apuntar series.', true);
     return;
   }
-  const btn = document.querySelector(`.add[data-idx="${idx}"]`);
+  const btn = document.querySelector(`.${accion}[data-idx="${idx}"]`);
   if (btn) {
     btn.disabled = true;
     btn.textContent = '…';
@@ -110,22 +114,30 @@ async function anadirSerie(idx, n = 1) {
       method: 'POST',
       // text/plain evita el preflight CORS, que Apps Script no responde
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ action: 'add', idx, n, clave }),
+      body: JSON.stringify({ action: accion, idx, n, clave }),
     });
     const res = await r.json();
     if (res.error) throw new Error(res.error);
     if (res.dashboard) pintarTodo(res.dashboard);
+
     const e = res.escrito || {};
-    const donde = e.fila
-      ? `fila ${e.fila}, columna ${String.fromCharCode(64 + (e.columna || 4))} → «${e.valor}»`
-      : 'hoja actualizada';
-    aviso(`+${n} serie · ${donde}`);
-  } catch (e) {
-    aviso(`No se pudo apuntar: ${e.message}`, true);
+    if (e.vacio) {
+      aviso('No había series que quitar en ese tipo', true);
+    } else if (accion === 'sub') {
+      const q = (e.quitado || []).map((x) => `«${x}»`).join(', ');
+      aviso(`−${n} serie · quitado ${q || '(nada)'}`);
+    } else {
+      const donde = e.fila
+        ? `fila ${e.fila}, columna ${String.fromCharCode(64 + (e.columna || 4))} → «${e.valor}»`
+        : 'hoja actualizada';
+      aviso(`+${n} serie · ${donde}`);
+    }
+  } catch (err) {
+    aviso(`No se pudo apuntar: ${err.message}`, true);
   } finally {
     if (btn) {
       btn.disabled = false;
-      btn.textContent = '+1';
+      btn.textContent = accion === 'add' ? '+1' : '−1';
     }
   }
 }
@@ -292,8 +304,9 @@ async function recargar() {
 }
 
 document.addEventListener('click', (ev) => {
-  const b = ev.target.closest('.add');
-  if (b) anadirSerie(Number(b.dataset.idx), 1);
+  const b = ev.target.closest('.add, .sub');
+  if (!b) return;
+  ajustar(Number(b.dataset.idx), b.classList.contains('add') ? 'add' : 'sub', 1);
 });
 
 conectarConfig();

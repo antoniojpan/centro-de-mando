@@ -126,23 +126,34 @@ section.card {
 .tipo.warn .saldo { color: var(--warn); }
 .tipo.bad .saldo { color: var(--bad); }
 
-.tipo .add {
+.tipo .acciones {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
-  border-radius: 9px;
+  top: 9px;
+  right: 9px;
+  display: flex;
+  gap: 5px;
+}
+
+.tipo .add,
+.tipo .sub {
+  width: 28px;
+  height: 26px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--panel);
-  color: var(--accent);
   font: inherit;
+  font-size: 0.8rem;
   font-weight: 700;
+  line-height: 1;
   cursor: pointer;
   transition: background .12s ease, transform .12s ease;
 }
-.tipo .add:hover:not(:disabled) { background: #1f2c44; transform: scale(1.06); }
-.tipo .add:disabled { opacity: .35; cursor: not-allowed; }
+.tipo .add { color: var(--accent); }
+.tipo .sub { color: var(--muted); }
+.tipo .add:hover:not(:disabled) { background: #1f2c44; transform: scale(1.07); }
+.tipo .sub:hover:not(:disabled) { background: #2a1d24; color: var(--bad); transform: scale(1.07); }
+.tipo .add:disabled,
+.tipo .sub:disabled { opacity: .35; cursor: not-allowed; }
 
 .btn-cfg {
   width: 38px;

@@ -283,6 +283,38 @@ function doGet(e) {
   }
 }
 
+/**
+ * Quita `n` series del tipo, empezando por la última anotada.
+ * Devuelve también los tokens eliminados, para poder avisar en la web.
+ */
+function cmQuitarSeries_(idx, n) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sh = ss.getSheetByName(CM_HOJA);
+  const tz = ss.getSpreadsheetTimeZone();
+  const col = CM_COL_TIPO[idx];
+  if (!col) throw new Error('Tipo de ejercicio fuera de rango');
+
+  const fila = cmFilaDeHoy_(sh, tz);
+  const celda = sh.getRange(fila, col);
+  const previo = String(celda.getValue() || '');
+
+  // Tokens = lo que hay entre comas; el último token no necesita coma final.
+  const cuerpo = previo.replace(/[\s,]+$/, '');
+  const tokens = cuerpo ? cuerpo.split(',').map((t) => t.trim()).filter(Boolean) : [];
+
+  if (!tokens.length) {
+    return { fila, columna: col, valor: '', quitado: [], vacio: true };
+  }
+
+  const cuantas = Math.max(1, Math.min(Math.round(n) || 1, 20));
+  const quitado = tokens.splice(Math.max(0, tokens.length - cuantas), cuantas);
+  const nuevo = tokens.length ? tokens.join(',') + ',' : '';
+
+  celda.setValue(nuevo);
+  SpreadsheetApp.flush();
+  return { fila, columna: col, valor: nuevo, quitado };
+}
+
 function doPost(e) {
   let body = {};
   try {
@@ -297,25 +329,30 @@ function doPost(e) {
   }
 
   try {
+    const idx = Number(body.idx);
+    const n = Number(body.n || 1);
+    let escrito;
+
     if (body.action === 'add') {
-      const idx = Number(body.idx);
-      const n = Number(body.n || 1);
-      const escrito = cmAnadirSeries_(idx, n);
-
-      // Refresca el JSON estático para el resto de dispositivos (best-effort).
-      try {
-        cmPublicarEnGitHub_(JSON.stringify(cmConstruirPayload_(), null, 2));
-      } catch (err) {
-        console.log('aviso: no se pudo publicar en GitHub: ' + err);
-      }
-
-      return cmRespuesta_({
-        ok: true,
-        escrito,
-        dashboard: cmConstruirPayload_(),
-      });
+      escrito = cmAnadirSeries_(idx, n);
+    } else if (body.action === 'sub') {
+      escrito = cmQuitarSeries_(idx, n);
+    } else {
+      return cmRespuesta_({ error: 'accion desconocida' });
     }
-    return cmRespuesta_({ error: 'accion desconocida' });
+
+    // Refresca el JSON estático para el resto de dispositivos (best-effort).
+    try {
+      cmPublicarEnGitHub_(JSON.stringify(cmConstruirPayload_(), null, 2));
+    } catch (err) {
+      console.log('aviso: no se pudo publicar en GitHub: ' + err);
+    }
+
+    return cmRespuesta_({
+      ok: true,
+      escrito,
+      dashboard: cmConstruirPayload_(),
+    });
   } catch (err) {
     return cmRespuesta_({ error: String(err && err.message || err) });
   }
