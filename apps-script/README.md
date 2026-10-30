@@ -25,12 +25,20 @@ Google (disparador cada 6 h)
 > No uses el token clásico `ghp_` que hay en el vault: ese da acceso a todos tus
 > repos. Este nuevo solo puede escribir en `centro-de-mando`.
 
-### 2. Pegar el script en la hoja
+### 2. Pegar el script en la hoja (SIN tocar el código existente)
+
+⚠️ El proyecto **ya tiene código** (`nuevodia()`, que regenera la pestaña
+`tendencias`). No pegues encima de `Código.gs`: lo borrarías.
 
 1. Abre la hoja **Longevidad Gamificada**.
 2. **Extensiones → Apps Script**.
-3. Borra el contenido de `Código.gs` y pega el de `apps-script/Code.gs`.
-4. Guarda.
+3. En la columna de archivos, junto a *Archivos*, pulsa **+ → Secuencia de comandos**.
+4. Ponle de nombre `centro_mando`.
+5. Pega ahí el contenido completo de `apps-script/Code.gs`.
+6. Guarda (Ctrl+S).
+
+Todos los nombres del script llevan prefijo `cm`/`CM_` justamente para no chocar
+con `nuevodia()` ni con nada del código que ya existe.
 
 ### 3. Guardar el token
 
@@ -43,13 +51,13 @@ En el editor de Apps Script: **Configuración del proyecto** (icono de engranaje
 
 ### 4. Comprobar y programar
 
-En el editor, selecciona la función y pulsa *Ejecutar*:
+En el editor, elige la función en el desplegable y pulsa *Ejecutar*:
 
-1. **`probar`** → en el registro debe salir el JSON con 7 tipos y ~60 días.
+1. **`cmProbar`** → en el registro debe salir `tipos: 7 | historia: ~60`.
    La primera vez pedirá autorizar permisos (leer la hoja, llamar a internet).
-2. **`actualizarDashboard`** → debe escribir `publicado` (o `sin cambios`).
+2. **`cmActualizarDashboard`** → debe escribir `publicado` (o `sin cambios`).
    Comprueba en GitHub que `data/dashboard.json` tiene un commit nuevo.
-3. **`instalarDisparador`** → deja el refresco automático cada 6 horas.
+3. **`cmInstalarDisparador`** → refresco automático cada 6 horas.
 
 Verificado: en la web aparece el sello `Snapshot: …` con la hora de la última
 actualización. Si pasan más de 2 días, la página lo avisa en rojo.
