@@ -151,6 +151,15 @@ function pintarLinea(d) {
 
 /* ---------- arranque ---------- */
 
+function antiguedad(iso) {
+  const ms = Date.now() - new Date(iso).getTime();
+  const h = ms / 36e5;
+  if (!isFinite(h)) return { texto: '', viejo: false };
+  if (h < 1) return { texto: 'actualizado hace minutos', viejo: false };
+  if (h < 48) return { texto: `actualizado hace ${Math.round(h)} h`, viejo: false };
+  return { texto: `⚠ datos de hace ${Math.round(h / 24)} días`, viejo: true };
+}
+
 (async function main() {
   try {
     const d = await cargar();
@@ -158,8 +167,10 @@ function pintarLinea(d) {
     pintarTipos(d);
     pintarBarras(d);
     pintarLinea(d);
-    document.getElementById('generado').textContent =
-      `Snapshot: ${d.generado.replace('T', ' ').slice(0, 16)} · fuente: ${d.fuente}`;
+    const edad = antiguedad(d.generado);
+    const pie = document.getElementById('generado');
+    pie.className = edad.viejo ? 'msg err' : '';
+    pie.textContent = `${edad.texto} · snapshot: ${d.generado.replace('T', ' ').slice(0, 16)} · ${d.fuente}`;
   } catch (e) {
     document.getElementById('tipos').innerHTML =
       `<p class="msg err">Error: ${e.message}</p>`;
