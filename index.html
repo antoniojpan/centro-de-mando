@@ -12,7 +12,9 @@
     <header class="top">
       <div>
         <h1>Centro <span>de Mando</span></h1>
-        <div class="sub" id="fecha-datos">Cargando…</div>
+        <div class="sub">
+          <span id="fecha-datos">Cargando…</span> · <span id="modo">…</span>
+        </div>
       </div>
       <div class="kpis">
         <div class="kpi">
@@ -23,8 +25,22 @@
           <div class="lbl">Unidades hoy</div>
           <div class="val" id="kpi-hoy">—</div>
         </div>
+        <button id="btn-cfg" class="btn-cfg" title="Configurar la API">⚙</button>
       </div>
     </header>
+
+    <section id="cfg" class="cfg oculto">
+      <p class="cfg-txt">
+        Pega aquí la URL de la aplicación web de Apps Script (termina en <code>/exec</code>)
+        y la clave. Se guardan solo en este navegador.
+      </p>
+      <label>URL de la API <input id="cfg-url" type="url" placeholder="https://script.google.com/macros/s/…/exec"></label>
+      <label>Clave <input id="cfg-clave" type="password" placeholder="clave compartida"></label>
+      <div class="cfg-acciones">
+        <button id="cfg-guardar" class="btn">Guardar</button>
+        <button id="cfg-borrar" class="btn btn-sec">Desconectar</button>
+      </div>
+    </section>
 
     <section class="card">
       <h2>Saldo por tipo <em>superávit / déficit acumulado</em></h2>
@@ -40,6 +56,9 @@
     <footer id="generado">Cargando datos…</footer>
 
   </div>
+
+  <div id="aviso" class="aviso oculto"></div>
+
   <script src="assets/app.js"></script>
 </body>
 </html>

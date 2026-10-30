@@ -199,3 +199,95 @@ function cmQuitarDisparador() {
   });
   console.log(`Disparadores eliminados: ${n}`);
 }
+
+// ------------------------------------------------- API web (lectura/escritura)
+
+/* Columnas de la pestaña registro donde se anotan las series, en el mismo
+ * orden que los tipos (D..J). */
+const CM_COL_TIPO = [4, 5, 6, 7, 8, 9, 10];
+
+function cmRespuesta_(obj) {
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+/** Fila de hoy: la que tiene la fecha de hoy según la hoja. */
+function cmFilaDeHoy_(sh, tz) {
+  const filas = sh.getRange(CM_FILA_DATOS, 1, 5, 1).getValues();
+  const hoy = Utilities.formatDate(new Date(), tz, 'yyyy-MM-dd');
+  for (let i = 0; i < filas.length; i++) {
+    if (cmIsoFecha_(filas[i][0], tz) === hoy) return CM_FILA_DATOS + i;
+  }
+  return CM_FILA_DATOS; // la fila 3 es «hoy» por fórmula
+}
+
+/**
+ * Añade `n` series de un tipo, en la fila de hoy.
+ * Se añade un token con coma, que es lo que cuenta la hoja.
+ */
+function cmAnadirSeries_(idx, n) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sh = ss.getSheetByName(CM_HOJA);
+  const tz = ss.getSpreadsheetTimeZone();
+  const col = CM_COL_TIPO[idx];
+  if (!col) throw new Error('Tipo de ejercicio fuera de rango');
+
+  const fila = cmFilaDeHoy_(sh, tz);
+  const celda = sh.getRange(fila, col);
+  const previo = String(celda.getValue() || '').trim();
+  const nuevo = (previo ? previo.replace(/,+$/, '') + ',' : '') +
+                '1,'.repeat(Math.max(1, Math.min(n || 1, 20)));
+  celda.setValue(nuevo);
+
+  SpreadsheetApp.flush(); // fuerza el recálculo de las fórmulas
+  return { fila, columna: col, valor: nuevo };
+}
+
+function doGet(e) {
+  const p = (e && e.parameter) || {};
+  try {
+    if (p.action === 'dashboard') return cmRespuesta_(cmConstruirPayload_());
+    return cmRespuesta_({ error: 'accion desconocida' });
+  } catch (err) {
+    return cmRespuesta_({ error: String(err && err.message || err) });
+  }
+}
+
+function doPost(e) {
+  let body = {};
+  try {
+    body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+  } catch (err) {
+    return cmRespuesta_({ error: 'cuerpo no es JSON' });
+  }
+
+  const clave = PropertiesService.getScriptProperties().getProperty('CM_CLAVE');
+  if (clave && body.clave !== clave) {
+    return cmRespuesta_({ error: 'clave incorrecta' });
+  }
+
+  try {
+    if (body.action === 'add') {
+      const idx = Number(body.idx);
+      const n = Number(body.n || 1);
+      const escrito = cmAnadirSeries_(idx, n);
+
+      // Refresca el JSON estático para el resto de dispositivos (best-effort).
+      try {
+        cmPublicarEnGitHub_(JSON.stringify(cmConstruirPayload_(), null, 2));
+      } catch (err) {
+        console.log('aviso: no se pudo publicar en GitHub: ' + err);
+      }
+
+      return cmRespuesta_({
+        ok: true,
+        escrito,
+        dashboard: cmConstruirPayload_(),
+      });
+    }
+    return cmRespuesta_({ error: 'accion desconocida' });
+  } catch (err) {
+    return cmRespuesta_({ error: String(err && err.message || err) });
+  }
+}

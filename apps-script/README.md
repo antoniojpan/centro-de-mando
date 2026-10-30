@@ -62,6 +62,36 @@ En el editor, elige la función en el desplegable y pulsa *Ejecutar*:
 Verificado: en la web aparece el sello `Snapshot: …` con la hora de la última
 actualización. Si pasan más de 2 días, la página lo avisa en rojo.
 
+## Escritura desde la web (+1 serie)
+
+El mismo archivo expone `doGet` / `doPost`, así que sirve también para apuntar
+series desde el botón `+1`. Para activarlo:
+
+### 5. Crear la clave
+
+Propiedades del script → añadir `CM_CLAVE` con una frase larga inventada
+(p. ej. 30 caracteres aleatorios). Es la única barrera: quien tenga URL + clave
+puede escribir series.
+
+### 6. Publicar como aplicación web
+
+1. **Implementar → Nueva implementación**.
+2. Tipo: **Aplicación web**.
+3. *Ejecutar como*: **Yo**. *Quién tiene acceso*: **Cualquier persona**.
+4. Copia la URL, termina en `/exec`.
+
+Después, en la web: botón **⚙** → pega URL y clave → *Guardar*. Se guardan en
+`localStorage`, nunca en el repo. La cabecera pasa a decir «lectura + escritura».
+
+⚠️ **Cada vez que cambies `Code.gs`** hay que publicar una versión nueva:
+*Implementar → Gestionar implementaciones → lápiz → Versión: Nueva versión*.
+Si no, la URL sigue sirviendo el código viejo.
+
+Qué hace `+1`: añade un token con coma en la celda del tipo, en la fila de hoy
+(columnas D–J). La hoja recalcula `Día`, `Saldo`, `Recuento individual` y
+`Saldo por tipo` con sus propias fórmulas — la web no calcula nada. Además
+refresca `data/dashboard.json` para que el resto de dispositivos lo vean.
+
 ## Mantenimiento
 
 - **Rotar el token**: crear otro en GitHub y actualizar la propiedad
