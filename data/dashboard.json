@@ -1,47 +1,51 @@
 {
-  "generado": "2026-10-30T22:09:58+00:00",
+  "generado": "2026-10-31T04:09:58+00:00",
   "fuente": "Longevidad Gamificada — pestaña registro",
-  "ultima_fecha": "2026-10-30",
-  "saldo_total": 109,
-  "total_hoy": 8.25,
+  "ultima_fecha": "2026-10-31",
+  "saldo_total": 100,
+  "total_hoy": 0,
   "tipos": [
     {
       "nombre": "Flexiones",
-      "saldo": 14.083333333333325,
+      "saldo": 13.083333333333325,
       "hoy": 0
     },
     {
       "nombre": "Dominadas",
-      "saldo": 13.333333333333336,
+      "saldo": 12.333333333333336,
       "hoy": 0
     },
     {
       "nombre": "tirón horiz",
-      "saldo": 13.333333333333314,
+      "saldo": 12.333333333333314,
       "hoy": 0
     },
     {
       "nombre": "Abdomin",
-      "saldo": 9,
-      "hoy": 1.75
+      "saldo": 8,
+      "hoy": 0
     },
     {
       "nombre": "Sentadillas",
-      "saldo": 14,
-      "hoy": 5
+      "saldo": 13,
+      "hoy": 0
     },
     {
       "nombre": "Aerob",
-      "saldo": 10,
-      "hoy": 1
+      "saldo": 9,
+      "hoy": 0
     },
     {
       "nombre": "VO2max",
-      "saldo": 10,
-      "hoy": 0.5
+      "saldo": 9,
+      "hoy": 0
     }
   ],
   "historia": [
+    {
+      "fecha": "2026-10-31",
+      "saldo": 100
+    },
     {
       "fecha": "2026-10-30",
       "saldo": 109
@@ -277,10 +281,6 @@
     {
       "fecha": "2026-09-02",
       "saldo": 57
-    },
-    {
-      "fecha": "2026-09-01",
-      "saldo": 56
     }
   ]
 }
