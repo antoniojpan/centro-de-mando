@@ -1,14 +1,14 @@
 {
-  "generado": "2026-11-04T11:09:57+00:00",
+  "generado": "2026-11-04T17:10:02+00:00",
   "fuente": "Longevidad Gamificada — pestaña registro",
   "ultima_fecha": "2026-11-04",
-  "saldo_total": 107,
-  "total_hoy": 0.5833333333333334,
+  "saldo_total": 117,
+  "total_hoy": 5.583333333333333,
   "tipos": [
     {
       "nombre": "Flexiones",
-      "saldo": 12.583333333333325,
-      "hoy": 0
+      "saldo": 17.583333333333325,
+      "hoy": 5
     },
     {
       "nombre": "Dominadas",
@@ -44,7 +44,7 @@
   "historia": [
     {
       "fecha": "2026-11-04",
-      "saldo": 107
+      "saldo": 117
     },
     {
       "fecha": "2026-11-03",
