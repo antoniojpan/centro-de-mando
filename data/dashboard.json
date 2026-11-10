@@ -1,9 +1,9 @@
 {
-  "generado": "2026-11-10T11:09:57+00:00",
+  "generado": "2026-11-10T17:09:57+00:00",
   "fuente": "Longevidad Gamificada — pestaña registro",
   "ultima_fecha": "2026-11-10",
-  "saldo_total": 115,
-  "total_hoy": 0.5833333333333334,
+  "saldo_total": 124,
+  "total_hoy": 5.833333333333333,
   "tipos": [
     {
       "nombre": "Flexiones",
@@ -27,8 +27,8 @@
     },
     {
       "nombre": "Sentadillas",
-      "saldo": 11.750000000000002,
-      "hoy": 0
+      "saldo": 17,
+      "hoy": 5.25
     },
     {
       "nombre": "Aerob",
@@ -44,7 +44,7 @@
   "historia": [
     {
       "fecha": "2026-11-10",
-      "saldo": 115
+      "saldo": 124
     },
     {
       "fecha": "2026-11-09",
