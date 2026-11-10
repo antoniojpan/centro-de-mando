@@ -1,66 +1,66 @@
 {
-  "generado": "2026-11-09T23:09:57+00:00",
+  "generado": "2026-11-10T05:09:57+00:00",
   "fuente": "Longevidad Gamificada — pestaña registro",
   "ultima_fecha": "2026-11-10",
-  "saldo_total": 123,
-  "total_hoy": 10.583333333333334,
+  "saldo_total": 114,
+  "total_hoy": 0,
   "tipos": [
     {
       "nombre": "Flexiones",
-      "saldo": 15.583333333333325,
+      "saldo": 14.583333333333325,
       "hoy": 0
     },
     {
       "nombre": "Dominadas",
-      "saldo": 15.333333333333336,
-      "hoy": 4
+      "saldo": 14.333333333333336,
+      "hoy": 0
     },
     {
       "nombre": "tirón horiz",
-      "saldo": 16.333333333333314,
-      "hoy": 5
+      "saldo": 15.333333333333314,
+      "hoy": 0
     },
     {
       "nombre": "Abdomin",
-      "saldo": 14.75,
+      "saldo": 13.75,
       "hoy": 0
     },
     {
       "nombre": "Sentadillas",
-      "saldo": 12.750000000000002,
+      "saldo": 11.750000000000002,
       "hoy": 0
     },
     {
       "nombre": "Aerob",
-      "saldo": 10,
-      "hoy": 1
+      "saldo": 9,
+      "hoy": 0
     },
     {
       "nombre": "VO2max",
-      "saldo": 12.833333333333336,
-      "hoy": 0.5833333333333334
+      "saldo": 11.833333333333336,
+      "hoy": 0
     }
   ],
   "historia": [
     {
       "fecha": "2026-11-10",
-      "saldo": 123
+      "saldo": 114
     },
     {
       "fecha": "2026-11-09",
-      "saldo": 121
+      "saldo": 123
     },
     {
       "fecha": "2026-11-08",
-      "saldo": 120
-    },
-    {
-      "fecha": "2026-11-07",
       "saldo": 121
     },
     {
+      "fecha": "2026-11-07",
+      "saldo": 120
+    },
+    {
       "fecha": "2026-11-06",
-      "saldo": 118
+      "saldo": 121
     },
     {
       "fecha": "2026-11-05",
@@ -68,11 +68,11 @@
     },
     {
       "fecha": "2026-11-04",
-      "saldo": 115
+      "saldo": 118
     },
     {
       "fecha": "2026-11-03",
-      "saldo": 112
+      "saldo": 115
     },
     {
       "fecha": "2026-11-02",
@@ -80,31 +80,31 @@
     },
     {
       "fecha": "2026-11-01",
-      "saldo": 111
+      "saldo": 112
     },
     {
       "fecha": "2026-10-31",
-      "saldo": 109
+      "saldo": 111
     },
     {
       "fecha": "2026-10-30",
-      "saldo": 105
+      "saldo": 109
     },
     {
       "fecha": "2026-10-29",
-      "saldo": 104
+      "saldo": 105
     },
     {
       "fecha": "2026-10-28",
-      "saldo": 101
+      "saldo": 104
     },
     {
       "fecha": "2026-10-27",
-      "saldo": 96
+      "saldo": 101
     },
     {
       "fecha": "2026-10-26",
-      "saldo": 93
+      "saldo": 96
     },
     {
       "fecha": "2026-10-25",
@@ -112,23 +112,23 @@
     },
     {
       "fecha": "2026-10-24",
-      "saldo": 90
+      "saldo": 93
     },
     {
       "fecha": "2026-10-23",
-      "saldo": 87
+      "saldo": 90
     },
     {
       "fecha": "2026-10-22",
-      "saldo": 89
+      "saldo": 87
     },
     {
       "fecha": "2026-10-21",
-      "saldo": 83
+      "saldo": 89
     },
     {
       "fecha": "2026-10-20",
-      "saldo": 79
+      "saldo": 83
     },
     {
       "fecha": "2026-10-19",
@@ -136,23 +136,23 @@
     },
     {
       "fecha": "2026-10-18",
-      "saldo": 76
+      "saldo": 79
     },
     {
       "fecha": "2026-10-17",
-      "saldo": 81
+      "saldo": 76
     },
     {
       "fecha": "2026-10-16",
-      "saldo": 75
+      "saldo": 81
     },
     {
       "fecha": "2026-10-15",
-      "saldo": 73
+      "saldo": 75
     },
     {
       "fecha": "2026-10-14",
-      "saldo": 70
+      "saldo": 73
     },
     {
       "fecha": "2026-10-13",
@@ -172,47 +172,47 @@
     },
     {
       "fecha": "2026-10-09",
-      "saldo": 66
+      "saldo": 70
     },
     {
       "fecha": "2026-10-08",
-      "saldo": 64
+      "saldo": 66
     },
     {
       "fecha": "2026-10-07",
-      "saldo": 63
+      "saldo": 64
     },
     {
       "fecha": "2026-10-06",
-      "saldo": 62
+      "saldo": 63
     },
     {
       "fecha": "2026-10-05",
-      "saldo": 59
+      "saldo": 62
     },
     {
       "fecha": "2026-10-04",
-      "saldo": 57
+      "saldo": 59
     },
     {
       "fecha": "2026-10-03",
-      "saldo": 53
+      "saldo": 57
     },
     {
       "fecha": "2026-10-02",
-      "saldo": 58
+      "saldo": 53
     },
     {
       "fecha": "2026-10-01",
-      "saldo": 55
+      "saldo": 58
     },
     {
       "fecha": "2026-09-30",
-      "saldo": 52
+      "saldo": 55
     },
     {
       "fecha": "2026-09-29",
-      "saldo": 50
+      "saldo": 52
     },
     {
       "fecha": "2026-09-28",
@@ -224,15 +224,15 @@
     },
     {
       "fecha": "2026-09-26",
-      "saldo": 55
-    },
-    {
-      "fecha": "2026-09-25",
       "saldo": 50
     },
     {
+      "fecha": "2026-09-25",
+      "saldo": 55
+    },
+    {
       "fecha": "2026-09-24",
-      "saldo": 46
+      "saldo": 50
     },
     {
       "fecha": "2026-09-23",
@@ -240,19 +240,19 @@
     },
     {
       "fecha": "2026-09-22",
-      "saldo": 43
+      "saldo": 46
     },
     {
       "fecha": "2026-09-21",
-      "saldo": 42
+      "saldo": 43
     },
     {
       "fecha": "2026-09-20",
-      "saldo": 41
+      "saldo": 42
     },
     {
       "fecha": "2026-09-19",
-      "saldo": 40
+      "saldo": 41
     },
     {
       "fecha": "2026-09-18",
@@ -260,7 +260,7 @@
     },
     {
       "fecha": "2026-09-17",
-      "saldo": 38
+      "saldo": 40
     },
     {
       "fecha": "2026-09-16",
@@ -268,19 +268,19 @@
     },
     {
       "fecha": "2026-09-15",
-      "saldo": 37
-    },
-    {
-      "fecha": "2026-09-14",
       "saldo": 38
     },
     {
-      "fecha": "2026-09-13",
+      "fecha": "2026-09-14",
       "saldo": 37
     },
     {
+      "fecha": "2026-09-13",
+      "saldo": 38
+    },
+    {
       "fecha": "2026-09-12",
-      "saldo": 35
+      "saldo": 37
     }
   ]
 }
