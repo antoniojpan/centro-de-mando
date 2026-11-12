@@ -1,9 +1,9 @@
 {
-  "generado": "2026-11-12T05:09:57+00:00",
+  "generado": "2026-11-12T11:09:59+00:00",
   "fuente": "Longevidad Gamificada — pestaña registro",
   "ultima_fecha": "2026-11-12",
-  "saldo_total": 117,
-  "total_hoy": 0,
+  "saldo_total": 118,
+  "total_hoy": 0.5833333333333334,
   "tipos": [
     {
       "nombre": "Flexiones",
@@ -37,14 +37,14 @@
     },
     {
       "nombre": "VO2max",
-      "saldo": 12.16666666666667,
-      "hoy": 0
+      "saldo": 12.750000000000004,
+      "hoy": 0.5833333333333334
     }
   ],
   "historia": [
     {
       "fecha": "2026-11-12",
-      "saldo": 117
+      "saldo": 118
     },
     {
       "fecha": "2026-11-11",
