@@ -1,9 +1,9 @@
 {
-  "generado": "2026-11-13T11:09:58+00:00",
+  "generado": "2026-11-13T17:10:04+00:00",
   "fuente": "Longevidad Gamificada — pestaña registro",
   "ultima_fecha": "2026-11-13",
-  "saldo_total": 120,
-  "total_hoy": 0.5833333333333334,
+  "saldo_total": 128,
+  "total_hoy": 8.583333333333334,
   "tipos": [
     {
       "nombre": "Flexiones",
@@ -12,13 +12,13 @@
     },
     {
       "nombre": "Dominadas",
-      "saldo": 11.333333333333336,
-      "hoy": 0
+      "saldo": 14.333333333333336,
+      "hoy": 3
     },
     {
       "nombre": "tirón horiz",
-      "saldo": 12.333333333333314,
-      "hoy": 0
+      "saldo": 15.333333333333314,
+      "hoy": 3
     },
     {
       "nombre": "Abdomin",
@@ -32,8 +32,8 @@
     },
     {
       "nombre": "Aerob",
-      "saldo": 11,
-      "hoy": 0
+      "saldo": 13,
+      "hoy": 2
     },
     {
       "nombre": "VO2max",
@@ -44,7 +44,7 @@
   "historia": [
     {
       "fecha": "2026-11-13",
-      "saldo": 120
+      "saldo": 128
     },
     {
       "fecha": "2026-11-12",
